@@ -2,6 +2,7 @@ server:
   port: 8080
 
 zuul:
+  sensitive-headers: Cookie,Set-Cookie
   routes:
     auth-center:
       path: /login/**
@@ -12,4 +13,4 @@ zuul:
       path: /backend/**
       url: http://127.0.0.1:8082/
 
-shuaicj.security.jwt.secret: otherpeopledontknowit
+security.jwt.secret: otherpeopledontknowit

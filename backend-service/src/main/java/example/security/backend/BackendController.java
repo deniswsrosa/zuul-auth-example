@@ -1,15 +1,23 @@
-package shuaicj.example.security.backend;
+package example.security.backend;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 
 /**
  * A simple controller.
  *
- * @author shuaicj 2017/10/18
  */
 @RestController
 public class BackendController {
+
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
 
     @GetMapping("/admin")
     public String admin() {
@@ -18,7 +26,7 @@ public class BackendController {
 
     @GetMapping("/user")
     public String user() {
-        return "Hello User!";
+        return "Hello there! your username is "+jwtTokenUtil.getLoggedUser()+" from tenant "+jwtTokenUtil.getClientId() ;
     }
 
     @GetMapping("/guest")

@@ -1,11 +1,14 @@
-package shuaicj.example.security.common;
+package example.security.common;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 
 import io.jsonwebtoken.Claims;
@@ -18,7 +21,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 /**
  * Authenticate requests with header 'Authorization: Bearer jwt-token'.
  *
- * @author shuaicj 2017/10/18
  */
 public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
 
@@ -53,4 +55,29 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
         }
         filterChain.doFilter(req, rsp);
     }
+
+
+    private class CustomHttpServletRequest extends HttpServletRequestWrapper {
+
+        private Map customHeaderMap = null;
+
+        public CustomHttpServletRequest(HttpServletRequest request) {
+            super(request);
+            customHeaderMap = new HashMap();
+        }
+        public void addHeader(String name,String value){
+            customHeaderMap.put(name, value);
+        }
+
+        @Override
+        public String getParameter(String name) {
+            String paramValue = super.getParameter(name); // query Strings
+            if (paramValue == null) {
+                paramValue = (String) customHeaderMap.get(name);
+            }
+            return paramValue;
+        }
+
+    }
+
 }

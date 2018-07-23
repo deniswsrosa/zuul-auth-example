@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>shuaicj.example.security</groupId>
+    <groupId>example.security</groupId>
     <artifactId>zuul-auth-example-parent</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
@@ -43,7 +43,7 @@
                 <version>0.7.0</version>
             </dependency>
             <dependency>
-                <groupId>shuaicj.example.security</groupId>
+                <groupId>example.security</groupId>
                 <artifactId>common</artifactId>
                 <version>${project.version}</version>
             </dependency>

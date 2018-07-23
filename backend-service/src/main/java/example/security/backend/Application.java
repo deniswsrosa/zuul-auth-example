@@ -1,4 +1,4 @@
-package shuaicj.example.security.backend;
+package example.security.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * Spring boot app.
  *
- * @author shuaicj 2017/10/18
  */
 @SpringBootApplication
 public class Application {
